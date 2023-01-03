@@ -1,11 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const Header = () => {
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+
+    const logout= ()=>{
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        alert("Logged out")
+        navigate("/login");
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-primary">
-                <Link className="navbar-brand text-white mx-3" to="/"> yo Blog App</Link>
+                <Link className="navbar-brand text-white mx-3" to="/">yo Blog</Link>
 
                 <button
                     className="navbar-toggler"
@@ -34,12 +45,19 @@ const Header = () => {
                         </li>
                     </ul>
                     <div className="div-inline mx-auto my-2 my-lg-0">
-                      <Link to={"/login"}> 
-                       <button className="btn btn-primary">Login</button>
-                       </Link> 
-                       <Link to={"/register"}> 
-                       <button className="btn btn-primary">Register</button>
-                       </Link>
+                        {token && token !== null ?
+                            <>
+                                <button className='btn btn-primary'>{username}</button>
+                                <button onClick={logout} className='btn btn-primary'>Logout</button>
+                            </>
+                            : <>
+                                <Link to={"/login"}>
+                                    <button className="btn btn-primary">Login</button>
+                                </Link>
+                                <Link to={"/register"}>
+                                    <button className="btn btn-primary">Register</button>
+                                </Link>
+                            </>}
                     </div>
                 </div>
             </nav>

@@ -1,8 +1,11 @@
 import {  BrowserRouter,Route, Routes} from "react-router-dom";
 import Header from "./Components/Header";
-import Home from "./Components/Home";
-import Login from "./Components/Login";
-import Register from "./Components/Register";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import AddBlog from "./Pages/AddBlog";
+import AddCateogry from "./Pages/AddCateogry";
+import SingleBlog from "./Pages/SingleBlog";
 
 
 function App() {
@@ -14,6 +17,10 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/> 
+      <Route path="/add-blog" element={<AddBlog/>}/> 
+      <Route path="/add-category" element={<AddCateogry/>}/> 
+      <Route path="/blog/:id" element={<SingleBlog/>}/> 
+      
     
     </Routes>
     </BrowserRouter>
