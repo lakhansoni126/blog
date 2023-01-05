@@ -1,7 +1,22 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 
+
 const Home = () => {
+  const [blogs, setBlogs] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchALLBlogs = async () => {
+  //     const res = await axios.get("http://localhost:9000/api/v1/get/allblogs", {
+  //       headers: { Authorization: ` Bearer ${localStorage.getItem("token")}`, },
+  //     });
+  //     setBlogs(res.data);
+  //   };
+  //   fetchALLBlogs();
+
+  // },[]);
+
   return (
     <>
       <main class="my-5">
@@ -22,11 +37,11 @@ const Home = () => {
                       <div class="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15)", }}></div>
                     </a>
                   </div>
-                  
+
                   <div class="card-body">
                     <h5 class="card-title">Demo</h5>
                     <p class="card-text">Demo Content</p>
-                    <Link to={`/blog/1`} class="btn btn-primary" >
+                    <Link to={`/ blog / 1`} class="btn btn-primary" >
                       Read More
                     </Link>
                   </div>
