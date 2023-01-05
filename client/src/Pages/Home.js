@@ -1,21 +1,21 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchALLBlogs = async () => {
-  //     const res = await axios.get("http://localhost:9000/api/v1/get/allblogs", {
-  //       headers: { Authorization: ` Bearer ${localStorage.getItem("token")}`, },
-  //     });
-  //     setBlogs(res.data);
-  //   };
-  //   fetchALLBlogs();
+  useEffect(() => {
+    const fetchALLBlogs = async () => {
+      const res = await axios.get("http://localhost:9000/api/v1/get/allblogs", {
+        headers: { Authorization: ` Bearer ${localStorage.getItem("token")}`, },
+      });
+      setBlogs(res.data);
+    };
+    fetchALLBlogs();
 
-  // },[]);
+  }, []);
 
   return (
     <>
@@ -27,26 +27,37 @@ const Home = () => {
             </h2>
 
             <div class="row">
-              <div class="col-lg-4 col-md-12 mb-4">
-                <div class="card">
-                  <div class="bg-image hover-overlay ripple"
-                    data-mdb-ripple-color="light" >
-                    <img src={'https://www.kindpng.com/picc/m/235-2350682_new-svg-image-small-user-login-icon-hd.png'} class="img-fluid" />
+              {blogs && blogs.length > 0 ?
 
-                    <a href="#!">
-                      <div class="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15)", }}></div>
-                    </a>
-                  </div>
+                blogs.map((item) => {
+                  return (
+                    <div class="col-lg-4 col-md-12 mb-4">
+                      <div class="card">
+                        <div class="bg-image hover-overlay ripple"
+                          data-mdb-ripple-color="light" >
+                          <img src={`http://localhost:900/${item.thumbnail} `} class="img-fluid" />
 
-                  <div class="card-body">
-                    <h5 class="card-title">Demo</h5>
-                    <p class="card-text">Demo Content</p>
-                    <Link to={`/ blog / 1`} class="btn btn-primary" >
-                      Read More
-                    </Link>
-                  </div>
-                </div>
-              </div>
+                          <a href="#!">
+                            <div class="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15)", }}></div>
+                          </a>
+                        </div>
+
+                        <div class="card-body">
+                          <h5 class="card-title">{item.title}</h5>
+                          <p class="card-text">{item.description}</p>
+                          <Link to={`/blog/${item._id}`} class="btn btn-primary" >
+                            Read More
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  )
+
+                })
+
+                : <h2>Loading</h2>
+              }
+
             </div>
           </section>
         </div>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const AddCateogry = () => {
 
-    const navigate = Navigate();
+    const navigate = useNavigate();
     const [input,setInput]= useState({
         title:"",
     });
